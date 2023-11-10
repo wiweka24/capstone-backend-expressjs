@@ -1,4 +1,22 @@
 const Recipient = require('../models/recipient')
+const Notification = require('../models/notification')
+
+exports.getLastHourNotification = async (req, res, next) => {
+  try {
+    const notifications = await Notification.find({
+      timestamp: {
+        $gte: new Date(new Date() - 60 * 60 * 1000)
+      }
+    });
+
+    res
+      .status(201)
+      .json(notifications);
+      
+  } catch (err) {
+    next(err);
+  }
+};
 
 exports.postNewRecipient = async (req, res, next) => {
   try {
