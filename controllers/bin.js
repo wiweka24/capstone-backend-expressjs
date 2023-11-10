@@ -2,6 +2,10 @@ const Bin = require('../models/bin');
 const organicBin = require('../models/organic-bin');
 const plasticBin = require('../models/plastic-bin');
 const paperBin = require('../models/paper-bin');
+const notification = require('../models/notification');
+const Recipient = require('../models/recipient');
+const { sendEmail } = require('../services/send-email');
+const { sendWhatsAppMessage } = require('../services/send-wa');
 
 /*
   @desc  Get All Bin from Database
@@ -152,10 +156,34 @@ exports.postNewBinDatas = async (req, res, next) => {
       }
     );
 
+    const recipient = await Recipient.find()
+    const email = recipient.map((recipient) => recipient.email)
+    const whatsAppNumber = recipient.map((recipient) => recipient.whatsAppNumber)
+
+    // Create Notification if bin is full
+    if (organicLevel >= 100) {
+      const message = `Tempah Sampah Organik ${req.params.binName} penuh, Mohon Diambil`;
+      await new notification({ text: message, binType: "organic", timestamp: currentTime }).save();
+      sendEmail(email, message)
+      sendWhatsAppMessage(whatsAppNumber, message)
+
+    } else if (plasticLevel >= 100) { 
+      const message = `Tempah Sampah Plastik ${req.params.binName} penuh, Mohon Diambil`;
+      await new notification({ text: message, binType: "plastic", timestamp: currentTime }).save();
+      sendEmail(email, message)
+      sendWhatsAppMessage(whatsAppNumber, message)
+
+    } else if (paperLevel >= 100) { 
+      const message = `Tempah Sampah Kertas ${req.params.binName} penuh, Mohon Diambil`;
+      await new notification({ text: message, binType: "paper", timestamp: currentTime }).save();
+      sendEmail(email, message)
+      sendWhatsAppMessage(whatsAppNumber, message)
+    }
+
     res
       .status(201)
       .json({ savedBinDatas: [savedOrganicBin, savedPlasticBin, savedPaperBin], updatedBin });
-  
+
     } catch (err) {
     next(err);
   }

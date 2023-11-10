@@ -1,8 +1,13 @@
 const { Router } = require('express');
-const { getAllBins, postNewBin, postNewBinDatas, getBinDatas, getLatestBinDatas, getLimitBinDatas } = require('../controllers/bin');
-
+const { 
+  getAllBins, 
+  postNewBin, 
+  postNewBinDatas, 
+  getBinDatas, 
+  getLatestBinDatas, 
+  getLimitBinDatas 
+} = require('../controllers/bin');
 const router = Router();
-// const { authMid } = require('../middleware/authMiddleware')
 
 /*
 All route for bin/{route}
