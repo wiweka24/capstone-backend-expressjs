@@ -2,8 +2,8 @@ const twilio = require('twilio');
 require('dotenv').config();
 
 const sendWhatsAppMessage = (whatsAppNumber, msg) => {
-  const accountSid = process.env.TWILIO_ACCOUNT_SID;
-  const authToken = process.env.TWILIO_AUTH_TOKEN;
+  const accountSid = process.env.NEXT_PUBLIC_TWILIO_ACCOUNT_SID;
+  const authToken = process.env.NEXT_PUBLIC_TWILIO_AUTH_TOKEN;
   const recipient = whatsAppNumber
   const client = new twilio(accountSid, authToken);
 

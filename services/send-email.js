@@ -4,11 +4,11 @@ require('dotenv').config();
 const sendEmail = (email, msg) => {
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
-    port: process.env.NODEMAILER_PORT,
+    port: process.env.NEXT_PUBLIC_NODEMAILER_PORT,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.NODEMAILER_USER,
-      pass: process.env.NODEMAILER_PASS,
+      user: process.env.NEXT_PUBLIC_NODEMAILER_USER,
+      pass: process.env.NEXT_PUBLIC_NODEMAILER_PASS,
     },  
   });
 

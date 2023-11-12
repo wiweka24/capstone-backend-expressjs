@@ -23,11 +23,11 @@ app
   .all("*", (req, res) => res.send("You've tried reaching a route that doesn't exist."))
 
 //dB
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.NEXT_PUBLIC_MONGODB_URI)
   .then(console.log("Connected to Database"))
   .catch((error) => console.error(error))   
 
 // Server / URL
-app.listen(process.env.PORT, () =>
+app.listen(process.env.NEXT_PUBLIC_PORT, () =>
   console.log(`Server running on port: http://localhost:${process.env.PORT}`)
 )
