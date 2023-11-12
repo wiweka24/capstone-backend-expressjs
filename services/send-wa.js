@@ -15,7 +15,7 @@ const sendWhatsAppMessage = (whatsAppNumber, msg) => {
         to: `whatsapp:${to}`,
       });
     } catch (error) {
-      next(error)
+      console.log(error);
     }
   }
   
