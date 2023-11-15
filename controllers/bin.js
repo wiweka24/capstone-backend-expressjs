@@ -134,14 +134,14 @@ exports.getLatestBinDatas = async (req, res, next) => {
 */
 exports.postNewBinDatas = async (req, res, next) => {
   try {
-    const { organicLevel, organicTemp, plasticLevel, plasticTemp, paperLevel, paperTemp } = req.body;
+    const { organicLevel, organicTemp, plasticLevel, plasticTemp, paperLevel, paperTemp, trashCount } = req.body;
     const currentTime = new Date().getTime();
 
     // Create the bin data objects
     const [savedOrganicBin, savedPlasticBin, savedPaperBin] = await Promise.all([
-      new organicBin({ level: organicLevel, temp: organicTemp, timestamp: currentTime }).save(),
-      new plasticBin({ level: plasticLevel, temp: plasticTemp, timestamp: currentTime }).save(),
-      new paperBin({ level: paperLevel, temp: paperTemp, timestamp: currentTime }).save()
+      new organicBin({ level: organicLevel, temp: organicTemp, timestamp: currentTime, numberOfTrash: trashCount }).save(),
+      new plasticBin({ level: plasticLevel, temp: plasticTemp, timestamp: currentTime, numberOfTrash: trashCount }).save(),
+      new paperBin({ level: paperLevel, temp: paperTemp, timestamp: currentTime, numberOfTrash: trashCount }).save()
     ]);
 
     // Update the main bin document

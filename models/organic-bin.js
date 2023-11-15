@@ -15,6 +15,11 @@ const OrganicBinSchema = mongoose.Schema({
     type: Date,
     required: true,
     unique: false,
+  },
+  numberOfTrash: {
+    type: Number,
+    required: true,
+    unique: false,
   }
 })
 
