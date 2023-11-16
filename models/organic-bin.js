@@ -11,6 +11,11 @@ const OrganicBinSchema = mongoose.Schema({
     required: false,
     unique: false,
   },
+  humidity: {
+    type: mongoose.Types.Decimal128,
+    required: false,
+    unique: false,
+  },
   timestamp: {
     type: Date,
     required: true,
