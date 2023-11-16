@@ -32,6 +32,7 @@ OrganicBinSchema.set('toJSON', {
   transform: (doc, ret) => {
     ret.level = ret.level ? parseFloat(ret.level.toString()) : null;
     ret.temp = ret.temp ? parseFloat(ret.temp.toString()) : null;
+    ret.humidity = ret.humidity ? parseFloat(ret.humidity.toString()) : null;
   }
 });
 
