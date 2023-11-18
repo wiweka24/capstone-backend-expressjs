@@ -161,23 +161,30 @@ exports.postNewBinDatas = async (req, res, next) => {
     const whatsAppNumber = recipient.map((recipient) => recipient.whatsAppNumber)
 
     // Create Notification if bin is full
-    if (organicLevel >= 100) {
+    if (organicLevel >= 90) {
       const message = `Tempah Sampah Organik ${req.params.binName} penuh, Mohon Diambil`;
       await new notification({ text: message, binType: "organic", timestamp: currentTime }).save();
       sendEmail(email, message)
       sendWhatsAppMessage(whatsAppNumber, message)
     } 
 
-    if (plasticLevel >= 100) { 
+    if (plasticLevel >= 90) { 
       const message = `Tempah Sampah Plastik ${req.params.binName} penuh, Mohon Diambil`;
       await new notification({ text: message, binType: "plastic", timestamp: currentTime }).save();
       sendEmail(email, message)
       sendWhatsAppMessage(whatsAppNumber, message)
     } 
     
-    if (paperLevel >= 100) { 
+    if (paperLevel >= 90) { 
       const message = `Tempah Sampah Kertas ${req.params.binName} penuh, Mohon Diambil`;
       await new notification({ text: message, binType: "paper", timestamp: currentTime }).save();
+      sendEmail(email, message)
+      sendWhatsAppMessage(whatsAppNumber, message)
+    }
+
+    if (organicTemp >= 40 || organicHumid >= 80) { 
+      const message = `Tempah Sampah Organik ${req.params.binName} sudah mulai membusuk, Mohon Diambil`;
+      await new notification({ text: message, binType: "organic", timestamp: currentTime }).save();
       sendEmail(email, message)
       sendWhatsAppMessage(whatsAppNumber, message)
     }
