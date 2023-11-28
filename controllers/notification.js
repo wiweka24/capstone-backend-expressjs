@@ -10,7 +10,7 @@ exports.getLastHourNotification = async (req, res, next) => {
     });
 
     res
-      .status(201)
+      .status(200)
       .json(notifications);
       
   } catch (err) {

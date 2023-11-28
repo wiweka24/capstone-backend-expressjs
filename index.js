@@ -29,5 +29,5 @@ mongoose.connect(process.env.NEXT_PUBLIC_MONGODB_URI)
 
 // Server / URL
 app.listen(process.env.NEXT_PUBLIC_PORT, () =>
-  console.log(`Server running on port: http://localhost:${process.env.PORT}`)
+  console.log(`Server running on port: http://localhost:${process.env.NEXT_PUBLIC_PORT}`)
 )
